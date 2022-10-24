@@ -1,0 +1,80 @@
+
+--1)Select All Rows from 'Customers' table
+
+Select * from Customers;
+
+--2)Get distinct countries from the Customers table
+
+select distinct Country
+From Customers;
+
+--3)Get all the rows from the table Customers where the ID starts with "BL"
+
+select * from Customers 
+Where Substring(CustomerID, 1, 2) = 'BL';
+
+--4) Select first 100 records from orders table
+--Discuss: This seems like a great thing to use if you needed a data subsample from a given data set for any reason.
+--If one were performing statistical calculations, for example, it might be necessary to operate with a smaller subset
+--of a database, especially if the overall dataset was quite large.
+
+Select top 100 *
+FROM Orders;
+
+--5)Get all the customers that live in the postal codes 1010, 3012, 12209, 05023
+
+Select * from Orders
+Where ShipPostalCode = '1010' or ShipPostalCode = '3012' or ShipPostalCode = '12209' or ShipPostalCode = '05023';
+
+--6) Get all orders where the ShipRegion is not NULL
+
+Select * from Orders
+Where ShipRegion <> 'NULL';
+
+--7)Get all customers ordered by the country, then by the city
+
+Select * From Orders
+Order by ShipCountry;
+
+Select * From Orders
+Order by ShipCity;
+
+--8) Insert a customer into the customers table
+
+insert into Customers
+Values ('ROFLC', 'MetaMon', 'Noah VanOrden', 'Company VIP', '123 Realstreet', 'Anytown', 'CA', '111111', 'USA', '1(800)-867-5309', '555-5420');
+
+--9) Update all ShipRegion to the value ‘EuroZone’ in the Orders table, where the ShipCountry is equal to France.
+
+Update Orders
+set ShipRegion = 'EuroZone'
+Where ShipCountry = 'France';
+
+--10)Delete all orders from OrderDetails that have quantity of 1. 
+
+Delete from [Order Details] 
+where Quantity = '1';
+
+--11) Find the CustomerID that placed order 10290 (orders table).
+
+Select CustomerID from Orders
+Where OrderID = '10290';
+
+--Select * from Orders;
+
+--12) Join the orders table to the customers table.
+--Inner Join used here.
+
+select * from Orders
+Inner Join Customers
+On Orders.CustomerID = Customers.CustomerID; 
+
+--13)Get employees’ firstname for all employees who report to no one.
+
+Select FirstName from Employees
+Where ReportsTo IS NULL;
+
+--14) Get employees’ firstname for all employees who report to Andrew.
+
+Select FirstName from Employees
+Where ReportsTo = '2';
